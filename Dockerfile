@@ -10,12 +10,12 @@ RUN addgroup --gid 1234 evebot && \
 WORKDIR /home/evebot
 USER evebot
 
-RUN git clone https://github.com/frymaster/eve-bot.git
+RUN git clone https://github.com/frymaster/eve-bot.git && \
+    git -C eve-bot checkout e8c651cfd3624e0f28da9103086b7725153f24ac && \
+    rm -rf eve-bot/.git
 
 WORKDIR /home/evebot/eve-bot
 
-RUN git checkout e8c651cfd3624e0f28da9103086b7725153f24ac && \
-    rm -rf .git && \
-    protoc --python_out=. Mumble.proto
+RUN protoc --python_out=. Mumble.proto
 
-ENTRYPOINT ["/usr/bin/python", "./eve-bot.py"]
+ENTRYPOINT ["./eve-bot.py"]
