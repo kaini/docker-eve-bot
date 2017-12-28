@@ -18,4 +18,4 @@ RUN git checkout e8c651cfd3624e0f28da9103086b7725153f24ac && \
     rm -rf .git && \
     protoc --python_out=. Mumble.proto
 
-ENTRYPOINT ./eve-bot.py
+ENTRYPOINT /usr/bin/python ./eve-bot.py
